@@ -30,9 +30,9 @@ local function worker(args)
     }
    
     local function update_widget(widget, stdout)
-        local volume_level = string.match(stdout, '(%-?%d+%.%d+)dB')
+        local volume_level = string.match(stdout, '(%-?%d+)%%')
         if volume_level ~= nil then 
-            widget:get_children()[1]:set_text("\u{fa7d} " .. volume_level .. "dB")
+            widget:get_children()[1]:set_text("\u{fa7d} " .. volume_level .. "%")
         else
             widget:get_children()[1]:set_text("Something wrong with volume.")
         end

@@ -5,6 +5,7 @@ local mod = {
     battery = require(module_path .. "mnf-awesome-widget-suite.battery"),
     sensors = require(module_path .. "mnf-awesome-widget-suite.sensors"),
     volume = require(module_path .. "mnf-awesome-widget-suite.volume"),
+    memory = require(module_path .. "mnf-awesome-widget-suite.memory"),
 }
 
 return mod

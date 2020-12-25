@@ -137,6 +137,7 @@ net_wireless_widget = net_widgets.wireless({interface="wlp5s0", timeout=2})
 mybattwidget = maws.battery()
 mysensorswidget = maws.sensors()
 myvolumewidget = maws.volume({card = 1, use_buttons = true})
+mymemorywidget = maws.memory({card = 1, use_buttons = true})
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
@@ -242,11 +243,10 @@ awful.screen.connect_for_each_screen(function(s)
         awful.widget.tasklist.filter.currenttags,
         tasklist_buttons,
         {
-            shape_border_width = 1,
-            shape_border_color = '#555555',
             shape = gears.shape.rounded_bar,
             spacing = 2,
-            tasklist_disable_icon = true
+            tasklist_disable_icon = false,
+            disable_task_name = false
         }
     )
 
@@ -258,7 +258,7 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            --mylauncher,
             wibox.widget.textbox(' \u{f309}  '),
             s.mytaglist,
             s.mypromptbox,
@@ -270,11 +270,13 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget.textbox('  '),
             net_wireless_widget,
             wibox.widget.textbox('  '),
+            mymemorywidget,
+            wibox.widget.textbox('  '),
+            mysensorswidget,
+            wibox.widget.textbox('  '),
             myvolumewidget,
             wibox.widget.textbox('  '),
             mybattwidget,
-            wibox.widget.textbox('  '),
-            mysensorswidget,
             wibox.widget.textbox('  '),
             wibox.widget.systray(),
             mytextclock,
@@ -630,18 +632,18 @@ end)
 
 client.connect_signal("focus", function(c) 
     c.border_color = beautiful.border_focus 
-    c.shape = gears.shape.rounded_rect
+    -- c.shape = gears.shape.rounded_rect
 end)
 
 client.connect_signal("unfocus", function(c) 
     c.border_color = beautiful.border_normal 
-    c.shape = gears.shape.rounded_rect
+    -- c.shape = gears.shape.rounded_rect
 end)
 -- }}}
 
 client.connect_signal("request::manage", function(c)
         gears.surface.apply_shape_bounding(c, gears.shape.rounded_rect, 20)
-        c.shape = gears.shape.rounded_rect
+        -- c.shape = gears.shape.rounded_rect
 end)
 
 -- Autostart
